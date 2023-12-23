@@ -3,6 +3,32 @@ const EMPTY_HEART = '♡'
 const FULL_HEART = '♥'
 
 // Your JavaScript code goes here!
+let modal = document.querySelector("#modal")
+modal.className = "hidden"
+const matches = document.querySelectorAll("li.like")
+matches.forEach(heart => {
+  heart.addEventListener("click", () => {
+  mimicServerCall ()
+  .then(function (response) {
+  console.log(response)
+  console.log(heart.childNodes[1])
+  
+  if (heart.childNodes[1].textContent === FULL_HEART) {
+    (heart.childNodes[1].textContent = EMPTY_HEART)
+  } 
+  else {
+    heart.childNodes[1].classList.add("activated-heart")
+  heart.childNodes[1].textContent = FULL_HEART
+  }
+
+  })
+  .catch(function (error) {
+    alert("Random server error. Try again.")
+    modal.classList.remove("hidden")
+    setTimeout((hidden)=> {modal.classList.add("hidden")}, 3000 )
+  })
+  })
+})
 
 
 
